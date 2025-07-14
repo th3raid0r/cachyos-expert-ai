@@ -206,13 +206,22 @@ install_default_actions() {
     echo "🎉 Your desktop shortcuts are ready to use!"
 }
 
+echo "🔧 Starting package installation..."
 install_pacman_packages;
+echo "✅ Package installation completed!"
 
 #install_python_packages not yet necessary
 
+echo "🔧 Starting repository clone..."
 clone_repository;
+echo "✅ Repository clone completed!"
 
+echo "🔧 Starting config setup..."
 setup_config;
+echo "✅ Config setup completed!"
 
+echo "🔧 Starting default actions installation..."
 install_default_actions;
+echo "✅ Default actions installation completed!"
+
 echo "🚀 Installation complete!"
