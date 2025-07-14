@@ -192,8 +192,8 @@ install_default_actions() {
 
     echo "✨ Adding these helpful shortcuts:"
     for template in "${desktop_templates[@]}"; do
-        if [ -f "desktop-templates/$template" ]; then
-            cp "desktop-templates/$template" "$HOME/Desktop/"
+        if [ -f "$HOME/.config/cachyos-expert/desktop-templates/$template" ]; then
+            cp "$HOME/.config/cachyos-expert/desktop-templates/$template" "$HOME/Desktop/"
             chmod +x "$HOME/Desktop/$template"
             case $template in
                 *update-system*) echo "   🔄 System Update Helper" ;;
