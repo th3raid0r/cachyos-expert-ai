@@ -213,3 +213,4 @@ install_pacman_packages;
 clone_repository;
 setup_config;
 install_default_actions;
+echo "🚀 Installation complete!"
