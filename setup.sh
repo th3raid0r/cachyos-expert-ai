@@ -76,6 +76,7 @@ clone_repository() {
 
     cd "$TARGET_DIR"
     chmod +x ./tools/*.sh
+    argc build
     echo "✨ Your AI assistant is ready at $TARGET_DIR"
 }
 
