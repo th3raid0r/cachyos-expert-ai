@@ -117,7 +117,7 @@ setup_config() {
     if [ -f "$initial_working_directory/.env" ]; then
         echo "🔍 Found your saved settings, checking what's missing..."
         for var_name in "${!env_vars[@]}"; do
-            existing_value=$(get_env_value ".env" "$var_name")
+            existing_value=$(get_env_value "$initial_working_directory/.env" "$var_name")
             if [ -n "$existing_value" ]; then
                 env_vars["$var_name"]="$existing_value"
             fi
@@ -205,8 +205,8 @@ install_default_actions() {
     echo "🎉 Your desktop shortcuts are ready to use!"
 }
 
-install_pacman_packages
+install_pacman_packages;
 #install_python_packages not yet necessary
-clone_repository
-setup_config
-install_default_actions
+clone_repository;
+setup_config;
+install_default_actions;
