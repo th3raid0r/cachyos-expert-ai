@@ -14,7 +14,7 @@ clients:
     max_batch_size: 100
 
 # --- RAG ---
-rag_embedding_model: text-embedding-ada-002
+rag_embedding_model: jina:jina-embeddings-v3
 
 # ---- session ----
 # Controls the persistence of the session. if true, auto save; if false, not save; if null, asking the user
