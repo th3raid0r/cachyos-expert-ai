@@ -1,76 +1,23 @@
-# ---- llm ----
-model: claude:claude-sonnet-4-20250514 # Default provider (non-reasoning)
-temperature: 0.3
-top_p: null
+model: claude:claude-sonnet-4-20250514
+save_shell_history: true
+editor: zeditor
+clients:
+  - type: claude
+    api-key: $CLAUDE_API_KEY
+  - type: openai
+    api-key: $OPENAI_API_KEY
+  - type: openai-compatible
+    name: jina
+    api-key: $JINA_API_KEY
+    max_tokens_per_chunk: 8192
+    default_chunk_size: 7800
+    max_batch_size: 100
 
-# ---- behavior ----
-stream: true
-save: true
-keybindings: emacs
-editor: null
-wrap: auto
-wrap_code: false
-
-# ---- function-calling ----
-function_calling: true # Enable tool calling globally
-mapping_tools:
-  # System management tools
-  system: "execute_command,fs_cat,fs_ls,fs_write"
-use_tools: system # Default tools for general use
-
-# ---- prelude ----
-repl_prelude: "role:cachyos-expert" # Start with CachyOS expert role by default
-cmd_prelude: "role:cachyos-expert"
-agent_prelude: null
+# --- RAG ---
+rag_embedding_model: text-embedding-ada-002
 
 # ---- session ----
-save_session: true
-compress_threshold: 4000
-summarize_prompt: "Summarize the technical discussion briefly in 200 words or less, focusing on system commands and solutions provided."
-summary_prompt: "This is a summary of the previous technical session: "
-
-# ---- appearance ----
-highlight: true
-light_theme: false
-left_prompt: "{color.green}{?session {session}/}{role}{color.cyan}>{color.reset} "
-right_prompt: "{color.purple}{?session {consume_tokens}}{color.reset}"
-
-# ---- misc ----
-save_shell_history: true
-user_agent: "aichat-cachyos"
-
-# ---- clients ----
-clients:
-  # Primary provider: Claude 4 Sonnet
-  - type: claude
-    api_key: YOUR_CLAUDE_API_KEY
-    api_base: https://api.anthropic.com/v1
-    models:
-      - name: claude-4-sonnet
-        max_input_tokens: 200000
-        supports_function_calling: true
-        supports_vision: true
-
-  # Backup provider: Gemini 3.5 Pro
-  - type: gemini
-    api_key: YOUR_GEMINI_API_KEY
-    api_base: https://generativelanguage.googleapis.com/v1beta
-    models:
-      - name: gemini-3.5-pro
-        max_input_tokens: 2000000
-        supports_function_calling: true
-        supports_vision: true
-    # Relaxed security settings for technical discussions
-    patch:
-      chat_completions:
-        ".*":
-          body:
-            safetySettings:
-              - category: HARM_CATEGORY_HARASSMENT
-                threshold: BLOCK_NONE
-              - category: HARM_CATEGORY_HATE_SPEECH
-                threshold: BLOCK_NONE
-              - category: HARM_CATEGORY_SEXUALLY_EXPLICIT
-                threshold: BLOCK_NONE
-              - category: HARM_CATEGORY_DANGEROUS_CONTENT
-                threshold: BLOCK_NONE
+# Controls the persistence of the session. if true, auto save; if false, not save; if null, asking the user
+save_session: false
+# Compress session when token count reaches or exceeds this threshold
+compress_threshold: 40000

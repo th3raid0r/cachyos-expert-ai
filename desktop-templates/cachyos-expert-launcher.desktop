@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CachyOS Expert - AI Assistant
+Comment=Launch CachyOS Expert AI for general assistance
+Exec=aichat --agent cachyos-expert
+Icon=applications-system
+Terminal=true
+Categories=System;Utility;ConsoleOnly;
+Keywords=ai;assistant;help;cachyos;expert;terminal;
+StartupNotify=true

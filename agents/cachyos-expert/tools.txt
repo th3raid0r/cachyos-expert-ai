@@ -5,6 +5,7 @@ fs_write.sh
 fs_mkdir.sh
 fs_patch.sh
 fs_rm.sh
+execute_command.sh
 get_current_time.sh
 send_mail.sh
 pacman_list.sh

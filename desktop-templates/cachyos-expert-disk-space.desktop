@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CachyOS Expert - Disk Space Analysis
+Comment=Get help analyzing why your hard drive is full
+Exec=zsh -c 'aichat --agent cachyos-expert "why is my hard drive full?"; echo ""; echo "Press Enter to close..."; read'
+Icon=drive-harddisk
+Terminal=true
+Categories=System;Utility;
+Keywords=disk;space;storage;full;analysis;cachyos;
+StartupNotify=true

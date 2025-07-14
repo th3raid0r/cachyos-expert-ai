@@ -12,6 +12,7 @@ main() {
     # Check if snap is installed
     if ! command -v snap &> /dev/null; then
         echo "Error: snap is not installed on this system" >> "$LLM_OUTPUT"
+        exit 0
     fi
 
     local snap_args="refresh"
@@ -33,6 +34,7 @@ main() {
             echo "Refresh completed successfully" >> "$LLM_OUTPUT"
         else
             echo "Refresh failed" >> "$LLM_OUTPUT"
+            exit 0
         fi
     else
         # Refresh specific packages
@@ -40,6 +42,7 @@ main() {
             echo "Refresh completed successfully" >> "$LLM_OUTPUT"
         else
             echo "Refresh failed" >> "$LLM_OUTPUT"
+            exit 0
         fi
     fi
 }

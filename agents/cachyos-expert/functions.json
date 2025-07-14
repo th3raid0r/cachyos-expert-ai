@@ -122,6 +122,22 @@
     }
   },
   {
+    "name": "execute_command",
+    "description": "Execute the shell command.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The command to execute."
+        }
+      },
+      "required": [
+        "command"
+      ]
+    }
+  },
+  {
     "name": "get_current_time",
     "description": "Get the current time.",
     "parameters": {

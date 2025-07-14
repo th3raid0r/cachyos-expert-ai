@@ -10,6 +10,7 @@ main() {
     # Check if snap is installed
     if ! command -v snap &> /dev/null; then
         echo "Error: snap is not installed on this system" >> "$LLM_OUTPUT"
+        exit 0
     fi
 
     local snap_args="find"
@@ -23,6 +24,7 @@ main() {
         # No search terms specified, show featured snaps
         snap ${snap_args} 2>/dev/null >> "$LLM_OUTPUT" || {
             echo "Error: Failed to search snaps" >> "$LLM_OUTPUT"
+            exit 0
         }
     else
         # Search with specific terms

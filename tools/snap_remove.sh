@@ -19,7 +19,7 @@ main() {
     # Check if packages were specified
     if [[ ${#packages[@]} -eq 0 ]]; then
         echo "Error: At least one package must be specified" >> "$LLM_OUTPUT"
-        exit 1
+        exit 0
     fi
 
     # Build snap arguments based on flags
@@ -33,7 +33,7 @@ main() {
         echo "Removal completed successfully" >> "$LLM_OUTPUT"
     else
         echo "Removal failed" >> "$LLM_OUTPUT"
-        exit 1
+        exit 0
     fi
 }
 

@@ -1,5 +1,21 @@
 [
   {
+    "name": "execute_command",
+    "description": "Execute the shell command.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The command to execute."
+        }
+      },
+      "required": [
+        "command"
+      ]
+    }
+  },
+  {
     "name": "fetch_url_via_curl",
     "description": "Extract the content from a given URL.",
     "parameters": {

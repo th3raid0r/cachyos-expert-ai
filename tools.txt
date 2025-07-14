@@ -1,3 +1,4 @@
+execute_command.sh
 fetch_url_via_curl.sh
 fs_cat.sh
 fs_ls.sh

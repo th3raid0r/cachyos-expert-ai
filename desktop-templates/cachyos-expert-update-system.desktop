@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CachyOS Expert - Update System
+Comment=Get help updating pacman, AUR, flatpak, and snaps
+Exec=zsh -c 'aichat --agent cachyos-expert "help me update my pacman, aur, flatpak, and snaps if they exist."; echo ""; echo "Press Enter to close..."; read'
+Icon=system-software-update
+Terminal=true
+Categories=System;Settings;
+Keywords=update;pacman;aur;flatpak;snap;cachyos;
+StartupNotify=true
