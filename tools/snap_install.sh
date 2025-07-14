@@ -12,6 +12,7 @@ main() {
     # Check if snap is installed
     if ! command -v snap &> /dev/null; then
         echo "Error: snap is not installed on this system" >> "$LLM_OUTPUT"
+        exit 0
     fi
 
     local snap_args="install"
@@ -20,6 +21,7 @@ main() {
     # Check if packages were specified
     if [[ ${#packages[@]} -eq 0 ]]; then
         echo "Error: At least one package must be specified" >> "$LLM_OUTPUT"
+        exit 0
     fi
 
     # Build snap arguments based on flags
@@ -36,6 +38,7 @@ main() {
         echo "Installation completed successfully" >> "$LLM_OUTPUT"
     else
         echo "Installation failed" >> "$LLM_OUTPUT"
+        exit 0
     fi
 }
 
