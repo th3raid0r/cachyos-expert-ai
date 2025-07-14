@@ -175,8 +175,20 @@ EMAIL_SMTP_PASS=${env_vars[EMAIL_SMTP_PASS]}"
     echo "📋 Copied config file too!"
 
     # Symlink contents of CachyOS Expert AI
-    ln -s ~/.config/cachyos-expert "$(aichat --info | sed -n 's/^functions_dir\s\+//p')"
-    echo "🔗 Connected AI assistant to your system!"
+    echo "🔍 Testing aichat command..."
+    aichat_info_output=$(aichat --info 2>&1)
+    echo "aichat --info output: $aichat_info_output"
+
+    functions_dir=$(echo "$aichat_info_output" | sed -n 's/^functions_dir\s\+//p')
+    echo "Extracted functions_dir: '$functions_dir'"
+
+    if [ -n "$functions_dir" ]; then
+        ln -s ~/.config/cachyos-expert "$functions_dir"
+        echo "🔗 Connected AI assistant to your system!"
+    else
+        echo "⚠️  Could not determine functions directory from aichat --info"
+        echo "⚠️  You may need to manually configure the functions directory"
+    fi
 }
 
 install_default_actions() {
