@@ -3,7 +3,9 @@
 # 🚀 CachyOS Expert AI Setup - Let's get you started! 🤖✨
 
 # Capture initial Working directory
-initial_working_directory=$(pwd)
+working_directory="$(pwd)"
+initial_working_directory="echo $working_directory"
+
 
 # 📦 Installing the tools we need for your AI assistant
 install_pacman_packages() {
