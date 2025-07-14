@@ -109,6 +109,8 @@ setup_config() {
     env_vars["EMAIL_SMTP_USER"]=""
     env_vars["EMAIL_SMTP_PASS"]=""
 
+    echo "Working directory: $(pwd)"
+
     if [ -f "$(pwd)/.env" ]; then
         echo "🔍 Found your saved settings, checking what's missing..."
         for var_name in "${!env_vars[@]}"; do
@@ -167,6 +169,7 @@ EMAIL_SMTP_PASS=${env_vars[EMAIL_SMTP_PASS]}"
     echo "📋 Copied config file too!"
 
     # Symlink contents of CachyOS Expert AI
+    cd ~/.config/cachyos-expert-ai
     ln -s ~/.config/cachyos-expert-ai "$(aichat --info | sed -n 's/^functions_dir\s\+//p')"
     echo "🔗 Connected AI assistant to your system!"
 }
