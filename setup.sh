@@ -2,9 +2,6 @@
 
 # 🚀 CachyOS Expert AI Setup - Let's get you started! 🤖✨
 
-# Capture initial Working directory
-initial_working_directory=$(pwd)
-
 # 📦 Installing the tools we need for your AI assistant
 install_pacman_packages() {
     echo "📋 Checking what software you already have..."
@@ -113,6 +110,7 @@ setup_config() {
     env_vars["EMAIL_SMTP_PASS"]=""
 
     echo "Working directory: $(pwd)"
+    echo "Initial working directory: $initial_working_directory"
 
     if [ -f "$initial_working_directory/.env" ]; then
         echo "🔍 Found your saved settings, checking what's missing..."
