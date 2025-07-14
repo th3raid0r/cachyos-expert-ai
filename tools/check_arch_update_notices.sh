@@ -19,12 +19,12 @@ main() {
         ## Parse the output so we know how many entries there are.
         num_entries=$(echo "$output" | wc -l)
         num_entries=$(($num_entries - 1))
-
-        for i in {0..$num_entries}; do
+        ## Max entries always 10, use newscheck read $i in order to read.
+        for i in {0..9}; do
             notice=$(newscheck read $i)
             echo "Notice $i: $notice" >> "$LLM_OUTPUT"
         done
-        fi
+
     fi
 }
 
