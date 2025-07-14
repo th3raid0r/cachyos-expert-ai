@@ -1,0 +1,884 @@
+[
+  {
+    "name": "fetch_url_via_curl",
+    "description": "Extract the content from a given URL.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to scrape."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    }
+  },
+  {
+    "name": "fs_cat",
+    "description": "Read the contents of a file at the specified path.\nUse this when you need to examine the contents of an existing file.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the file to read"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "fs_ls",
+    "description": "List all files and directories at the specified path.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the directory to list"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "fs_write",
+    "description": "Write the full file contents to a file at the specified path.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the file to write to"
+        },
+        "contents": {
+          "type": "string",
+          "description": "The full contents to write to the file"
+        }
+      },
+      "required": [
+        "path",
+        "contents"
+      ]
+    }
+  },
+  {
+    "name": "fs_mkdir",
+    "description": "Create a new directory at the specified path.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the directory to create"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "fs_patch",
+    "description": "Apply a patch to a file at the specified path.\nThis can be used to edit the file, without having to rewrite the whole file.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the file to apply to"
+        },
+        "contents": {
+          "type": "string",
+          "description": "The patch to apply to the file\n\nHere is an example of a patch block that can be applied to modify the file to request the user's name:\n--- a/hello.py\n+++ b/hello.py\n@@ ... @@\n def hello():\n-    print(\"Hello World\")\n+    name = input(\"What is your name? \")\n+    print(f\"Hello {name}\")"
+        }
+      },
+      "required": [
+        "path",
+        "contents"
+      ]
+    }
+  },
+  {
+    "name": "fs_rm",
+    "description": "Remove the file or directory at the specified path.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the file or directory to remove"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  },
+  {
+    "name": "get_current_time",
+    "description": "Get the current time.",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  {
+    "name": "send_mail",
+    "description": "Send a email.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "recipient": {
+          "type": "string",
+          "description": "The recipient of the email."
+        },
+        "subject": {
+          "type": "string",
+          "description": "The subject of the email."
+        },
+        "body": {
+          "type": "string",
+          "description": "The body of the email."
+        }
+      },
+      "required": [
+        "recipient",
+        "subject",
+        "body"
+      ]
+    }
+  },
+  {
+    "name": "pacman_list",
+    "description": "Check if packages are installed using pacman -Q",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to check (can specify multiple)"
+        },
+        "explicit": {
+          "type": "boolean",
+          "description": "Only show explicitly installed packages"
+        },
+        "deps": {
+          "type": "boolean",
+          "description": "Only show packages installed as dependencies"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "pacman_search",
+    "description": "Search for packages in repositories using pacman -Ss",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Search term(s) (can specify multiple)"
+        },
+        "installed": {
+          "type": "boolean",
+          "description": "Search only installed packages (-Qs instead of -Ss)"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "pacman_install",
+    "description": "Install packages using pacman -S",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to install (required, can specify multiple)"
+        },
+        "needed": {
+          "type": "boolean",
+          "description": "Only install packages that are not already installed"
+        },
+        "as_deps": {
+          "type": "boolean",
+          "description": "Install packages as dependencies"
+        }
+      },
+      "required": [
+        "package"
+      ]
+    }
+  },
+  {
+    "name": "pacman_remove",
+    "description": "Remove packages using pacman -R",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to remove (required, can specify multiple)"
+        },
+        "recursive": {
+          "type": "boolean",
+          "description": "Remove packages and their dependencies"
+        },
+        "nosave": {
+          "type": "boolean",
+          "description": "Remove configuration files as well"
+        }
+      },
+      "required": [
+        "package"
+      ]
+    }
+  },
+  {
+    "name": "pacman_update",
+    "description": "Update system packages using pacman -Syu",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "refresh": {
+          "type": "boolean",
+          "description": "Force refresh of package databases before update"
+        },
+        "ignore": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Ignore specified packages during update"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "yay_search",
+    "description": "Search for packages in repositories and AUR using yay -Ss",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Search term(s) (can specify multiple)"
+        },
+        "aur_only": {
+          "type": "boolean",
+          "description": "Search only AUR packages"
+        },
+        "repo_only": {
+          "type": "boolean",
+          "description": "Search only official repository packages"
+        },
+        "installed": {
+          "type": "boolean",
+          "description": "Search only installed packages (-Qs instead of -Ss)"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "yay_install",
+    "description": "Install packages using yay -S (supports both official repos and AUR)",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to install (required, can specify multiple)"
+        },
+        "needed": {
+          "type": "boolean",
+          "description": "Only install packages that are not already installed"
+        },
+        "as_deps": {
+          "type": "boolean",
+          "description": "Install packages as dependencies"
+        },
+        "aur_only": {
+          "type": "boolean",
+          "description": "Only search AUR packages"
+        },
+        "repo_only": {
+          "type": "boolean",
+          "description": "Only search official repository packages"
+        }
+      },
+      "required": [
+        "package"
+      ]
+    }
+  },
+  {
+    "name": "yay_update",
+    "description": "Update system packages using yay -Syu (includes AUR packages)",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "refresh": {
+          "type": "boolean",
+          "description": "Force refresh of package databases before update"
+        },
+        "aur_only": {
+          "type": "boolean",
+          "description": "Only update AUR packages"
+        },
+        "repo_only": {
+          "type": "boolean",
+          "description": "Only update official repository packages"
+        },
+        "devel": {
+          "type": "boolean",
+          "description": "Update AUR development packages"
+        },
+        "ignore": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Ignore specified packages during update"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "flatpak_list",
+    "description": "List installed flatpaks using flatpak list",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to check (can specify multiple, optional)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "List user installations only (default is system-wide)"
+        },
+        "app": {
+          "type": "boolean",
+          "description": "List applications only"
+        },
+        "runtime": {
+          "type": "boolean",
+          "description": "List runtimes only"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "flatpak_search",
+    "description": "Search for packages in Flatpak repositories using flatpak search",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Search term(s) (can specify multiple)"
+        },
+        "app": {
+          "type": "boolean",
+          "description": "Search for applications only"
+        },
+        "runtime": {
+          "type": "boolean",
+          "description": "Search for runtimes only"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "flatpak_install",
+    "description": "Install packages using flatpak install",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to install (required, can specify multiple)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Install for current user only (default is system-wide)"
+        }
+      },
+      "required": [
+        "package"
+      ]
+    }
+  },
+  {
+    "name": "flatpak_remove",
+    "description": "Remove packages using flatpak uninstall",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to remove (required, can specify multiple)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Remove from user installation (default is system-wide)"
+        },
+        "unused": {
+          "type": "boolean",
+          "description": "Remove unused runtimes and extensions"
+        },
+        "delete_data": {
+          "type": "boolean",
+          "description": "Delete application data"
+        }
+      },
+      "required": [
+        "package"
+      ]
+    }
+  },
+  {
+    "name": "flatpak_update",
+    "description": "Update/upgrade flatpaks using flatpak update",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to update (optional, updates all if none specified)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Update user installations only (default is system-wide)"
+        },
+        "app": {
+          "type": "boolean",
+          "description": "Update applications only"
+        },
+        "runtime": {
+          "type": "boolean",
+          "description": "Update runtimes only"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "snap_list",
+    "description": "List installed snaps using snap list",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to check (can specify multiple, optional)"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "snap_search",
+    "description": "Search for packages in Snap store using snap find",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Search term(s) (can specify multiple)"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "snap_install",
+    "description": "Install packages using snap install",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to install (required, can specify multiple)"
+        },
+        "classic": {
+          "type": "boolean",
+          "description": "Install snap with classic confinement"
+        },
+        "channel": {
+          "type": "string",
+          "description": "Install from specific channel (stable, candidate, beta, edge)"
+        }
+      },
+      "required": [
+        "package"
+      ]
+    }
+  },
+  {
+    "name": "snap_remove",
+    "description": "Remove packages using snap remove",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to remove (required, can specify multiple)"
+        },
+        "purge": {
+          "type": "boolean",
+          "description": "Remove snap and its data completely"
+        }
+      },
+      "required": [
+        "package"
+      ]
+    }
+  },
+  {
+    "name": "snap_update",
+    "description": "Update/refresh snaps using snap refresh",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package name(s) to refresh (optional, refreshes all if none specified)"
+        },
+        "channel": {
+          "type": "string",
+          "description": "Switch to specific channel (stable, candidate, beta, edge)"
+        },
+        "list": {
+          "type": "boolean",
+          "description": "Show available updates without installing"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "systemctl_enable",
+    "description": "Enable systemd units using systemctl enable",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Service unit name(s) to enable (required, can specify multiple)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Enable for current user only (default is system-wide)"
+        },
+        "now": {
+          "type": "boolean",
+          "description": "Start the unit immediately after enabling"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    }
+  },
+  {
+    "name": "systemctl_disable",
+    "description": "Disable systemd units using systemctl disable",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Service unit name(s) to disable (required, can specify multiple)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Disable for current user only (default is system-wide)"
+        },
+        "now": {
+          "type": "boolean",
+          "description": "Stop the unit immediately after disabling"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    }
+  },
+  {
+    "name": "systemctl_start",
+    "description": "Start systemd units using systemctl start",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Service unit name(s) to start (required, can specify multiple)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Start for current user only (default is system-wide)"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    }
+  },
+  {
+    "name": "systemctl_stop",
+    "description": "Stop systemd units using systemctl stop",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Service unit name(s) to stop (required, can specify multiple)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Stop for current user only (default is system-wide)"
+        }
+      },
+      "required": [
+        "unit"
+      ]
+    }
+  },
+  {
+    "name": "systemctl_list",
+    "description": "List systemd units, timers, sockets, and services using systemctl",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "all": {
+          "type": "boolean",
+          "description": "Show all units including inactive ones"
+        },
+        "failed": {
+          "type": "boolean",
+          "description": "Show only failed units"
+        },
+        "state": {
+          "type": "string",
+          "description": "Filter by unit state (active, inactive, failed, loaded, etc.)"
+        },
+        "type": {
+          "type": "string",
+          "description": "Filter by unit type (service, timer, socket, target, mount, etc.)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "List user units only (default is system-wide)"
+        },
+        "unit_files": {
+          "type": "boolean",
+          "description": "List unit files instead of units"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Show only enabled unit files (use with --unit-files)"
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Show only disabled unit files (use with --unit-files)"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "systemctl_status",
+    "description": "Check status of systemd units using systemctl status",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Service unit name(s) to check (can specify multiple, optional)"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Check user units only (default is system-wide)"
+        },
+        "lines": {
+          "type": "string",
+          "description": "Number of journal lines to show"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "journalctl_logs",
+    "description": "Parse and query systemd journal logs using journalctl",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Filter logs for specific service unit(s)"
+        },
+        "since": {
+          "type": "string",
+          "description": "Show logs since specific time (e.g., \"2 hours ago\", \"yesterday\")"
+        },
+        "lines": {
+          "type": "string",
+          "description": "Number of recent log lines to show"
+        },
+        "priority": {
+          "type": "string",
+          "description": "Filter by log priority (0-7 or emerg, alert, crit, err, warning, notice, info, debug)"
+        },
+        "follow": {
+          "type": "boolean",
+          "description": "Follow log output (real-time)"
+        },
+        "boot": {
+          "type": "boolean",
+          "description": "Show logs from current boot only"
+        },
+        "kernel": {
+          "type": "boolean",
+          "description": "Show kernel messages only"
+        },
+        "user": {
+          "type": "boolean",
+          "description": "Show user session logs (default is system)"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "web_search_kagi",
+    "description": "Perform a web search using Kagi API to get up-to-date information or additional context.\nUse this when you need current information or feel a search could provide a better answer.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query to search for."
+        },
+        "limit": {
+          "type": "string",
+          "description": "Maximum number of search results to return."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "web_search_archwiki",
+    "description": "Search the ArchWiki using MediaWiki API to find Arch Linux documentation.\nUse this when you need specific information about Arch Linux packages, configuration, or troubleshooting.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The search query for ArchWiki."
+        },
+        "limit": {
+          "type": "string",
+          "description": "Maximum number of search results to return."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "check_arch_update_notices",
+    "description": "Check for Arch Linux update notices and mark them as read if any are unread",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  }
+]
