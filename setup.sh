@@ -215,9 +215,7 @@ EMAIL_SMTP_PASS=${env_vars[EMAIL_SMTP_PASS]}"
         echo "⚠️  Could not determine functions directory from aichat --info"
         echo "⚠️  You may need to manually configure the functions directory"
     fi
-}
 
-install_default_actions() {
     echo "🖥️  Creating handy shortcuts on your desktop..."
 
     desktop_templates=(
@@ -244,6 +242,7 @@ install_default_actions() {
     echo "🎉 Your desktop shortcuts are ready to use!"
 }
 
+
 echo "🔧 Starting package installation..."
 install_pacman_packages;
 echo "✅ Package installation completed!"
@@ -257,9 +256,5 @@ echo "✅ Repository clone completed!"
 echo "🔧 Starting config setup..."
 setup_config;
 echo "✅ Config setup completed!"
-
-echo "🔧 Starting default actions installation..."
-install_default_actions;
-echo "✅ Default actions installation completed!"
 
 echo "🚀 Installation complete!"
