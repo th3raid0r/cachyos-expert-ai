@@ -172,8 +172,7 @@ EMAIL_SMTP_PASS=${env_vars[EMAIL_SMTP_PASS]}"
     echo "📋 Copied config file too!"
 
     # Symlink contents of CachyOS Expert AI
-    cd ~/.config/cachyos-expert-ai
-    ln -s ~/.config/cachyos-expert-ai "$(aichat --info | sed -n 's/^functions_dir\s\+//p')"
+    ln -s ~/.config/cachyos-expert "$(aichat --info | sed -n 's/^functions_dir\s\+//p')"
     echo "🔗 Connected AI assistant to your system!"
 }
 
