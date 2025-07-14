@@ -8,7 +8,7 @@ install_pacman_packages() {
     packages=$(sudo pacman -Qq)
 
     echo "🛠️  Getting the essential tools ready..."
-    packages_to_install=("yay" "newscheck" "jq" "argc" "python")
+    packages_to_install=("yay" "newscheck" "jq" "argc" "python" "aichat")
 
     packages_to_install_minus_installed=$(echo "${packages_to_install[@]}" | tr ' ' '\n' | grep -v -F -x "${packages[@]}")
 
@@ -109,7 +109,7 @@ setup_config() {
     env_vars["EMAIL_SMTP_USER"]=""
     env_vars["EMAIL_SMTP_PASS"]=""
 
-    if [ -f ".env" ]; then
+    if [ -f "$(pwd)/.env" ]; then
         echo "🔍 Found your saved settings, checking what's missing..."
         for var_name in "${!env_vars[@]}"; do
             existing_value=$(get_env_value ".env" "$var_name")
