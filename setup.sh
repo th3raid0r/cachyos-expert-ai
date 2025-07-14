@@ -209,8 +209,12 @@ install_default_actions() {
 }
 
 install_pacman_packages;
+
 #install_python_packages not yet necessary
+
 clone_repository;
+
 setup_config;
+
 install_default_actions;
 echo "🚀 Installation complete!"
