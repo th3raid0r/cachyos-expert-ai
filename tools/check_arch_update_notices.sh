@@ -21,7 +21,7 @@ main() {
         num_entries=$(($num_entries - 1))
         ## Max entries always 10, use newscheck read $i in order to read.
         for i in {0..9}; do
-            notice=$(newscheck read $i)
+            notice=$(sudo newscheck read $i)
             echo "Notice $i: $notice" >> "$LLM_OUTPUT"
         done
 
