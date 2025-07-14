@@ -9,7 +9,7 @@ main() {
     if newscheck check | grep -q "no unread" 2>&1 >> "$LLM_OUTPUT"; then
         echo "All notices are up to date" >> "$LLM_OUTPUT"
     else
-        output=$(sudo newscheck list --unread 2>&1)
+        output=$(newscheck list --unread 2>&1)
         ## Example output
         # 0: linux-firmware >= 20250613.12fe085f-5 upgrade requires manual intervention Sat, 21 Jun 2025 16:09:08 -0700
         # 1: Plasma 6.4.0 will need manual intervention if you are on X11      Fri, 20 Jun 2025 00:08:17 -0700
