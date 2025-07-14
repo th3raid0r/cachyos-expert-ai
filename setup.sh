@@ -75,6 +75,7 @@ clone_repository() {
     git clone https://github.com/th3raid0r/cachyos-expert-ai.git "$TARGET_DIR"
 
     cd "$TARGET_DIR"
+    chmod +x ./tools/*.sh
     echo "✨ Your AI assistant is ready at $TARGET_DIR"
 }
 
