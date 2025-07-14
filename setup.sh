@@ -182,9 +182,7 @@ EMAIL_SMTP_PASS=${env_vars[EMAIL_SMTP_PASS]}"
 install_default_actions() {
     echo "🖥️  Creating handy shortcuts on your desktop..."
 
-    mkdir -p "$HOME/Desktop"
-
-    local desktop_templates=(
+    desktop_templates=(
         "cachyos-expert-update-system.desktop"
         "cachyos-expert-disk-space.desktop"
         "cachyos-expert-launcher.desktop"
