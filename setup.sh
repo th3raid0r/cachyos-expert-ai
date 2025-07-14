@@ -188,28 +188,28 @@ EMAIL_SMTP_PASS=${env_vars[EMAIL_SMTP_PASS]}"
         # Check if source directory exists
         if [ ! -d ~/.config/cachyos-expert ]; then
             echo "❌ Source directory ~/.config/cachyos-expert does not exist!"
-            return 1
-        fi
-
-        # Check if target directory exists and create if needed
-        target_parent=$(dirname "$functions_dir")
-        if [ ! -d "$target_parent" ]; then
-            echo "📁 Creating parent directory: $target_parent"
-            mkdir -p "$target_parent"
-        fi
-
-        # Remove existing symlink/file if it exists
-        if [ -e "$functions_dir" ] || [ -L "$functions_dir" ]; then
-            echo "🗑️  Removing existing file/symlink at $functions_dir"
-            rm -rf "$functions_dir"
-        fi
-
-        # Create the symlink
-        if ln -s ~/.config/cachyos-expert "$functions_dir" 2>&1; then
-            echo "🔗 Connected AI assistant to your system!"
+            echo "⚠️  Skipping symlink creation"
         else
-            echo "❌ Failed to create symlink!"
-            echo "❌ You may need to manually link ~/.config/cachyos-expert to $functions_dir"
+            # Check if target directory exists and create if needed
+            target_parent=$(dirname "$functions_dir")
+            if [ ! -d "$target_parent" ]; then
+                echo "📁 Creating parent directory: $target_parent"
+                mkdir -p "$target_parent"
+            fi
+
+            # Remove existing symlink/file if it exists
+            if [ -e "$functions_dir" ] || [ -L "$functions_dir" ]; then
+                echo "🗑️  Removing existing file/symlink at $functions_dir"
+                rm -rf "$functions_dir"
+            fi
+
+            # Create the symlink
+            if ln -s ~/.config/cachyos-expert "$functions_dir" 2>&1; then
+                echo "🔗 Connected AI assistant to your system!"
+            else
+                echo "❌ Failed to create symlink!"
+                echo "❌ You may need to manually link ~/.config/cachyos-expert to $functions_dir"
+            fi
         fi
     else
         echo "⚠️  Could not determine functions directory from aichat --info"
