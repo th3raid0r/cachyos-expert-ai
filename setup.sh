@@ -97,7 +97,7 @@ is_var_missing() {
 }
 
 # 🔑 Setting up your AI keys (the secret codes that make it work!)
-render_env_file() {
+setup_config() {
     echo "🔑 Let's configure your AI assistant..."
 
     declare -A env_vars
@@ -162,13 +162,13 @@ EMAIL_SMTP_PASS=${env_vars[EMAIL_SMTP_PASS]}"
 
     cp .env ~/.config/aichat/.env
     echo "📋 Copied settings to the right place for your AI!"
-}
+
     cp config.yaml ~/.config/aichat/config.yaml
-    echo "Copied .env and config.yaml to ~/.config/aichat/"
+    echo "📋 Copied config file too!"
 
     # Symlink contents of CachyOS Expert AI
     ln -s ~/.config/cachyos-expert-ai "$(aichat --info | sed -n 's/^functions_dir\s\+//p')"
-    echo "Created symbolic link for CachyOS Expert AI."
+    echo "🔗 Connected AI assistant to your system!"
 }
 
 install_default_actions() {
